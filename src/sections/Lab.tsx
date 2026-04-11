@@ -112,20 +112,8 @@ const Lab = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="lab" className="relative w-full h-[80svh] min-h-screen bg-black overflow-hidden">
+    <section ref={sectionRef} id="lab" className="relative w-full h-[80svh] min-h-9/10 bg-black overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse at 20% 30%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 70%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.06) 0%, transparent 60%)
-            `
-          }}
-        />
-      </div>
 
       <div className="absolute inset-0 opacity-20"
         style={{
@@ -134,7 +122,7 @@ const Lab = () => {
         }}
       />
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-4 py-16 sm:px-6 sm:py-16 lg:px-8 lg:py-16">
+      <div className="relative z-10 flex h-full flex-col justify-between px-4 py-20 sm:px-6 sm:py-20 lg:px-8 lg:py-20">
         <div className="lab-header mx-auto w-full max-w-6xl text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 mb-2 sm:mb-4">
             <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-violet-400" />
