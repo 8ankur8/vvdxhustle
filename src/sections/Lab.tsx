@@ -59,30 +59,23 @@ const Lab = () => {
       const dots = section.querySelector('.lab-dots');
       const mobileGrid = section.querySelector('.lab-mobile-grid');
 
-      // ✅ FIX 1: DO NOT HIDE CONTENT (no blank screen)
-      gsap.set(header, { y: 16 });
-      gsap.set([stage, mobileGrid], { y: 12, scale: 0.98 });
-      gsap.set(dots, { y: 10 });
+      // ✅ FIX: no full hide → avoids blank screen
+      gsap.set(header, { autoAlpha: 1, y: 24 });
+      gsap.set(stage, { autoAlpha: 1, y: 20, scale: 0.96 });
+      gsap.set(mobileGrid, { autoAlpha: 1, y: 20, scale: 0.96 });
+      gsap.set(dots, { autoAlpha: 1, y: 12 });
 
-      const cardPhaseStart = 0.1;
-      const cardPhaseEnd = 0.75;
+      const cardPhaseStart = 0.2;
+      const cardPhaseEnd = 0.78;
 
       const scrollTl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
+        defaults: { ease: 'power3.out' },
         scrollTrigger: {
           trigger: section,
-
-          // ✅ FIX 2: no delay start
           start: 'top top',
-
-          // ✅ FIX 3: shorter scroll
-          end: '+=130vh',
-
+          end: '+=180vh', // balanced scroll distance
           pin: true,
-
-          // ✅ FIX 4: responsive scroll
-          scrub: 0.2,
-
+          scrub: 0.35, // smoother feel
           anticipatePin: 1,
           invalidateOnRefresh: true,
 
@@ -104,23 +97,23 @@ const Lab = () => {
         }
       });
 
-      // ✅ FIX 5: smooth reveal (NOT hidden → just animated)
       scrollTl
-        .to(header, { y: 0, duration: 0.25 }, 0)
+        // ✅ fast reveal (no delay feel)
+        .to(header, { y: 0, duration: 0.2 }, 0)
         .to(stage, { y: 0, scale: 1, duration: 0.25 }, 0)
         .to(mobileGrid, { y: 0, scale: 1, duration: 0.25 }, 0)
-        .to(dots, { y: 0, duration: 0.25 }, 0)
+        .to(dots, { y: 0, duration: 0.2 }, 0)
 
-        // hold animation
-        .to(stage, { scale: 1, duration: 0.5, ease: 'none' }, 0.2)
+        // ✅ keep your original card phase
+        .to(stage, { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: 'none' }, 0.2)
 
-        // exit
+        // ✅ exit same as original feel
         .to([header, stage, dots, mobileGrid], {
           autoAlpha: 0,
-          y: -24,
-          duration: 0.25,
-          ease: 'power1.in'
-        }, 0.85);
+          y: -36,
+          duration: 0.2,
+          ease: 'power2.in'
+        }, 0.82);
 
     }, section);
 
@@ -143,29 +136,29 @@ const Lab = () => {
         }}
       />
 
-      <div className="relative z-10 flex h-full flex-col justify-between px-4 py-20 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex h-full flex-col justify-between px-4 py-20 sm:px-6 sm:py-20 lg:px-8 lg:py-20">
 
         {/* HEADER */}
         <div className="lab-header mx-auto w-full max-w-6xl text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 mb-4">
-            <Sparkles className="w-4 h-4 text-violet-400" />
-            <span className="text-xs text-white/60 font-mono tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 mb-2 sm:mb-4">
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-violet-400" />
+            <span className="text-[10px] sm:text-xs text-white/60 font-mono tracking-wider">
               EXPERIMENTAL PROJECTS
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-            THE{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-violet-400 to-cyan-400">
-              LAB
-            </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+            THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-violet-400 to-cyan-400">LAB</span>
           </h2>
         </div>
 
         {/* STAGE */}
-        <div className="lab-stage flex flex-1 items-center justify-center overflow-hidden py-6">
-          <div className="hidden md:block w-full max-w-5xl mx-auto px-4" style={{ perspective: '1000px' }}>
-            <div className="relative mx-auto h-[50vh] max-w-4xl">
+        <div className="lab-stage flex flex-1 items-center justify-center overflow-hidden py-4 sm:py-6 lg:py-8">
+          <div
+            className="hidden md:block w-full max-w-5xl mx-auto px-4"
+            style={{ perspective: '1000px' }}
+          >
+            <div className="relative mx-auto h-[min(22rem,46vh)] sm:h-[min(24rem,48vh)] lg:h-[min(28rem,54vh)] max-w-4xl">
 
               <div
                 className="absolute inset-0 flex items-center justify-center transition-transform duration-150"
@@ -182,37 +175,63 @@ const Lab = () => {
                   return (
                     <div
                       key={item.id}
-                      className="absolute w-64 transition-all duration-400"
+                      className="absolute w-52 sm:w-60 lg:w-72 transition-all duration-500"
                       style={{
-                        transform: `rotateY(${angle}deg) translateZ(12rem)`
+                        transform: `rotateY(${angle}deg) translateZ(clamp(9rem, 20vw, 12rem))`,
+                        transformStyle: 'preserve-3d',
+                        backfaceVisibility: 'hidden'
                       }}
                     >
-                      <div className={`p-5 rounded-2xl border transition-all duration-400 ${
+                      {/* 👇 YOUR ORIGINAL CARD DESIGN (UNCHANGED) */}
+                      <div className={`relative p-4 sm:p-5 lg:p-6 rounded-2xl border transition-all duration-500 ${
                         isActive
-                          ? 'bg-white/10 border-white/30 shadow-xl'
+                          ? 'bg-white/10 border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.1)]'
                           : 'bg-black/60 border-white/10'
                       }`}>
-                        <Icon className={`mb-3 ${isActive ? 'text-white' : 'text-white/40'}`} />
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.color} opacity-0 transition-opacity duration-500 ${isActive ? 'opacity-15' : ''}`} />
 
-                        <h3 className={`text-xl font-bold ${
-                          isActive ? 'text-white' : 'text-white/60'
-                        }`}>
-                          {item.title}
-                        </h3>
+                        <div className="relative">
+                          <div className={`mb-3 sm:mb-4 relative ${isActive ? 'text-white' : 'text-white/40'}`}>
+                            <div className={`absolute inset-0 blur-xl bg-gradient-to-r ${item.color} transition-opacity duration-500 ${isActive ? 'opacity-50' : 'opacity-0'}`} />
+                            <Icon className="w-6 h-6 sm:w-8 sm:h-8 relative z-10" />
+                          </div>
 
-                        <p className="text-sm text-white/60">
-                          {item.description}
-                        </p>
+                          <div className={`text-[10px] sm:text-xs font-mono mb-1 ${isActive ? 'text-white/60' : 'text-white/30'}`}>
+                            {item.fullTitle}
+                          </div>
+
+                          <h3 className={`text-lg sm:text-xl lg:text-2xl font-bold mb-2 ${isActive ? 'text-white' : 'text-white/60'}`}>
+                            {item.title}
+                          </h3>
+
+                          <p className={`text-xs sm:text-sm mb-3 sm:mb-4 ${isActive ? 'text-white/70' : 'text-white/40'}`}>
+                            {item.description}
+                          </p>
+
+                          <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                            {item.projects.slice(0, isActive ? 4 : 2).map((project, i) => (
+                              <span key={i} className={`px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs rounded-full border transition-all duration-300 ${
+                                isActive
+                                  ? `bg-gradient-to-r ${item.color} bg-opacity-20 text-white border-white/20`
+                                  : 'bg-white/5 text-white/40 border-white/10'
+                              }`}>
+                                {project}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
+
                     </div>
                   );
                 })}
               </div>
+
             </div>
           </div>
 
-          {/* MOBILE */}
-          <div className="lab-mobile-grid md:hidden w-full max-w-sm mx-auto">
+          {/* MOBILE GRID */}
+          <div className="lab-mobile-grid md:hidden w-full max-w-sm mx-auto px-1">
             <div className="grid grid-cols-2 gap-3">
               {labItems.map((item, index) => {
                 const isActive = index === activeIndex;
@@ -227,7 +246,9 @@ const Lab = () => {
                         : 'bg-black/40 border-white/10'
                     }`}
                   >
-                    <Icon className="mb-2" />
+                    <div className={`mb-2 ${isActive ? 'text-white' : 'text-white/50'}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
                     <h3 className="text-sm font-bold">{item.title}</h3>
                   </div>
                 );
@@ -237,7 +258,7 @@ const Lab = () => {
         </div>
 
         {/* DOTS */}
-        <div className="lab-dots flex justify-center gap-3">
+        <div className="lab-dots mx-auto flex w-full max-w-5xl justify-center gap-2 sm:gap-3">
           {labItems.map((_, index) => (
             <button
               key={index}
