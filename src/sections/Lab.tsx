@@ -61,7 +61,7 @@ const Lab = () => {
 
       gsap.set([header, stage, dots, mobileGrid], { autoAlpha: 0 });
       gsap.set(header, { y: 36 });
-      gsap.set([stage, mobileGrid], { y: 28, scale: 0.96 });
+      gsap.set([stage, mobileGrid], { y: 16, scale: 0.98 });
       gsap.set(dots, { y: 18 });
 
       const cardPhaseStart = 0.2;
@@ -71,8 +71,8 @@ const Lab = () => {
         defaults: { ease: 'power3.out' },
         scrollTrigger: {
           trigger: section,
-          start: 'top top',
-          end: '+=240vh',
+          start: 'top 85%',
+          end: '+=180vh',
           pin: true,
           scrub: 0.6,
           anticipatePin: 1,
