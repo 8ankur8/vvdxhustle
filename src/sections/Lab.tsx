@@ -59,29 +59,28 @@ const Lab = () => {
       const dots = section.querySelector('.lab-dots');
       const mobileGrid = section.querySelector('.lab-mobile-grid');
 
-      // 🔥 FIX 1: Less offset → faster visible
-      gsap.set([header, stage, dots, mobileGrid], { autoAlpha: 0 });
+      // ✅ FIX 1: DO NOT HIDE CONTENT (no blank screen)
       gsap.set(header, { y: 16 });
       gsap.set([stage, mobileGrid], { y: 12, scale: 0.98 });
       gsap.set(dots, { y: 10 });
 
-      const cardPhaseStart = 0.1;   // 🔥 earlier
-      const cardPhaseEnd = 0.75;    // smoother spread
+      const cardPhaseStart = 0.1;
+      const cardPhaseEnd = 0.75;
 
       const scrollTl = gsap.timeline({
         defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: section,
 
-          // 🔥 FIX 2: start earlier (pre-reveal)
-          start: 'top 85%',
+          // ✅ FIX 2: no delay start
+          start: 'top top',
 
-          // 🔥 FIX 3: shorter scroll distance
+          // ✅ FIX 3: shorter scroll
           end: '+=130vh',
 
           pin: true,
 
-          // 🔥 FIX 4: faster response
+          // ✅ FIX 4: responsive scroll
           scrub: 0.2,
 
           anticipatePin: 1,
@@ -105,17 +104,17 @@ const Lab = () => {
         }
       });
 
-      // 🔥 FIX 5: no delay between elements (instant reveal)
+      // ✅ FIX 5: smooth reveal (NOT hidden → just animated)
       scrollTl
-        .to(header, { autoAlpha: 1, y: 0, duration: 0.25 }, 0)
-        .to(stage, { autoAlpha: 1, y: 0, scale: 1, duration: 0.25 }, 0)
-        .to(mobileGrid, { autoAlpha: 1, y: 0, scale: 1, duration: 0.25 }, 0)
-        .to(dots, { autoAlpha: 1, y: 0, duration: 0.25 }, 0)
+        .to(header, { y: 0, duration: 0.25 }, 0)
+        .to(stage, { y: 0, scale: 1, duration: 0.25 }, 0)
+        .to(mobileGrid, { y: 0, scale: 1, duration: 0.25 }, 0)
+        .to(dots, { y: 0, duration: 0.25 }, 0)
 
-        // smooth holding phase
+        // hold animation
         .to(stage, { scale: 1, duration: 0.5, ease: 'none' }, 0.2)
 
-        // exit animation
+        // exit
         .to([header, stage, dots, mobileGrid], {
           autoAlpha: 0,
           y: -24,
@@ -165,8 +164,6 @@ const Lab = () => {
 
         {/* STAGE */}
         <div className="lab-stage flex flex-1 items-center justify-center overflow-hidden py-6">
-
-          {/* DESKTOP */}
           <div className="hidden md:block w-full max-w-5xl mx-auto px-4" style={{ perspective: '1000px' }}>
             <div className="relative mx-auto h-[50vh] max-w-4xl">
 
