@@ -1,17 +1,9 @@
-import { Github, Twitter, Linkedin, Youtube, Mail } from 'lucide-react';
 
 const footerLinks = {
   program: ['Curriculum', 'Tiers', 'Lab', 'Career Support'],
   company: ['About Us', 'Blog', 'Press Kit', 'Contact'],
   legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy'],
 };
-
-const socialLinks = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Github, href: '#', label: 'GitHub' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-];
 
 const Footer = () => {
   return (
