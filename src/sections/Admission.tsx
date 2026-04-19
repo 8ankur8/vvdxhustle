@@ -52,7 +52,7 @@ const Admission = () => {
           </h2>
 
           <p className="text-sm sm:text-base text-white/50">
-            Cohort 3 starts March 2025. Limited seats available.
+            Limited seats available.
           </p>
         </div>
 
@@ -60,19 +60,8 @@ const Admission = () => {
         {!isSubmitted ? (
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             <div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-transparent border-2 border-white/20 rounded-xl text-white text-sm sm:text-base placeholder:text-white/40 focus:border-white focus:outline-none transition-colors"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
+            <a
+              href="https://vvdx.in/arena"
               className="group w-full px-6 py-3 sm:py-4 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isLoading ? (
@@ -83,7 +72,7 @@ const Admission = () => {
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}
-            </button>
+            </a>
 
             <p className="text-center text-xs text-white/40">
               By applying, you agree to our Terms of Service and Privacy Policy.
