@@ -25,21 +25,6 @@ const Footer = () => {
             <p className="text-white/50 text-xs sm:text-sm mb-4 sm:mb-5 max-w-xs">
               Empowering the next generation of AI builders. Learn to create, deploy, and scale generative AI applications.
             </p>
-            <div className="flex gap-2">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a 
-                    key={social.label} 
-                    href={social.href} 
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-white hover:text-black transition-all duration-300" 
-                    aria-label={social.label}
-                  >
-                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </a>
-                );
-              })}
-            </div>
           </div>
 
           {/* Links */}
@@ -91,15 +76,9 @@ const Footer = () => {
               <p className="text-xs sm:text-sm text-white/50">Get the latest news on AI and our programs.</p>
             </div>
             <div className="flex gap-2">
-              <input 
-                type="email" 
-                placeholder="your@email.com" 
-                className="px-3 sm:px-4 py-2 bg-white/5 border border-white/10 rounded-full text-white text-xs sm:text-sm placeholder:text-white/30 focus:outline-none focus:border-white/30 w-40 sm:w-52" 
-              />
-              <button className="px-3 sm:px-4 py-2 bg-white text-black rounded-full text-xs sm:text-sm font-medium hover:bg-white/90 transition-colors flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Subscribe</span>
-              </button>
+              <a href="https://vvdx.in/arena" className="px-3 sm:px-4 py-2 bg-white text-black rounded-full text-xs sm:text-sm font-medium hover:bg-white/90 transition-colors flex items-center gap-2">
+                <span className="Explore Now"></span>
+              </a>
             </div>
           </div>
         </div>
