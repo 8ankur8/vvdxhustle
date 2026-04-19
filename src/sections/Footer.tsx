@@ -77,7 +77,7 @@ const Footer = () => {
             </div>
             <div className="flex gap-2">
               <a href="https://vvdx.in/arena" className="px-3 sm:px-4 py-2 bg-white text-black rounded-full text-xs sm:text-sm font-medium hover:bg-white/90 transition-colors flex items-center gap-2">
-                <span className="Explore Now"></span>
+                Explore Now
               </a>
             </div>
           </div>
