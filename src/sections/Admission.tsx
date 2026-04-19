@@ -45,7 +45,6 @@ const Admission = () => {
         </div>
 
         {/* Form */}
-        {!isSubmitted ? (
           <form className="space-y-4 sm:space-y-5">
             <div>
             <a
@@ -64,15 +63,6 @@ const Admission = () => {
               By applying, you agree to our Terms of Service and Privacy Policy.
             </p>
           </form>
-        ) : (
-          <div className="text-center py-6 sm:py-8 animate-fade-in">
-            <div className="w-14 h-14 sm:w-16 mx-auto mb-4 sm:mb-5 rounded-full bg-white/10 flex items-center justify-center">
-              <CheckCircle className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Application Received!</h3>
-            <p className="text-sm text-white/50">We&apos;ll be in touch soon with next steps.</p>
-          </div>
-        )}
 
         {/* Stats */}
         <div className="mt-10 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-4">
